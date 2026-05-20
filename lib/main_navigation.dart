@@ -4,6 +4,7 @@ import 'screens/tax/pbb_page.dart';
 import 'screens/tax/pajak_kendaraan_page.dart';
 import 'screens/tax/pajak_usaha_page.dart';
 import 'screens/tax/layanan_keliling_page.dart';
+import 'screens/users/users_page.dart';
 
 class MainNavigation extends StatefulWidget {
   const MainNavigation({super.key});
@@ -21,6 +22,7 @@ class _MainNavigationState extends State<MainNavigation> {
     PajakKendaraanPage(),
     PajakUsahaPage(),
     LayananKelilingPage(),
+    UsersPage(),
   ];
 
   @override
@@ -33,8 +35,8 @@ class _MainNavigationState extends State<MainNavigation> {
         type: BottomNavigationBarType.fixed,
         selectedItemColor: const Color(0xFF003566),
         unselectedItemColor: Colors.grey,
-        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
-        unselectedLabelStyle: const TextStyle(fontSize: 11),
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+        unselectedLabelStyle: const TextStyle(fontSize: 10),
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
@@ -60,6 +62,11 @@ class _MainNavigationState extends State<MainNavigation> {
             icon: Icon(Icons.directions_bus_outlined),
             activeIcon: Icon(Icons.directions_bus),
             label: 'Keliling',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.cloud_outlined),
+            activeIcon: Icon(Icons.cloud),
+            label: 'API Demo',
           ),
         ],
       ),

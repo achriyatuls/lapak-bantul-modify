@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'screens/auth/login_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -14,9 +15,7 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
             icon: Image.asset('assets/images/Ellipse6.png'),
-            onPressed: () {
-              // Handle button press
-            },
+            onPressed: () => _showLogoutDialog(context),
           ),
         ],
 
@@ -178,7 +177,46 @@ class HomePage extends StatelessWidget {
   }
 
   //merapikan gridview karena berulang
-  // Fungsi pembantu agar kode lebih bersih
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: const Text(
+          'Keluar',
+          style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF003566)),
+        ),
+        content: const Text('Apakah Anda yakin ingin keluar dari aplikasi?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Batal', style: TextStyle(color: Colors.grey)),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(ctx);
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (_) => const LoginPage()),
+                (route) => false,
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            child: const Text(
+              'Keluar',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildMenuItem(String title, Color color) {
     return Container(
       padding: const EdgeInsets.all(16),
