@@ -2,19 +2,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import '../config/env.dart';
 
 class AuthService {
   static bool _googleReady = false;
-
-  static const _serverClientId =
-      '33800468217-8ofcqhhg52ugofuc6msog5tl5t8v7n59.apps.googleusercontent.com';
 
   static Future<User?> signInWithGoogle() async {
     if (Firebase.apps.isEmpty) {
       throw Exception('Firebase belum dikonfigurasi.');
     }
 
-    // Web: gunakan signInWithPopup dari Firebase Auth (tidak pakai google_sign_in)
     if (kIsWeb) {
       return _signInWithGoogleWeb();
     }
@@ -44,7 +41,9 @@ class AuthService {
   static Future<User?> _signInWithGoogleMobile() async {
     debugPrint('[AuthService] Mobile: Initializing GoogleSignIn...');
     if (!_googleReady) {
-      await GoogleSignIn.instance.initialize(serverClientId: _serverClientId);
+      await GoogleSignIn.instance.initialize(
+        serverClientId: Env.googleServerClientId,
+      );
       _googleReady = true;
     }
 
